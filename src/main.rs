@@ -1,5 +1,5 @@
 use clap::{Parser, Subcommand};
-use revolut::cli::PlanArgs;
+use revolut::cli::{PlanArgs, SimulateArgs};
 
 #[derive(Parser)]
 #[command(name = "revolut")]
@@ -15,6 +15,8 @@ struct Cli {
 enum Commands {
     /// Get plan breakpoints
     Plan(PlanArgs),
+    /// Simulate compound interest for a plan
+    Simulate(SimulateArgs),
 }
 
 fn main() {
@@ -22,5 +24,6 @@ fn main() {
 
     match cli.command {
         Commands::Plan(args) => args.run(),
+        Commands::Simulate(args) => args.run(),
     }
 }
