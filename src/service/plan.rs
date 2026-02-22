@@ -1,7 +1,6 @@
 use crate::data::{Plan, PLANS};
+use crate::infrastructure::TAX_WITHHOLDING;
 use crate::service::simulate::calculate_net_interest;
-
-const TAX_WITHHOLDING: f64 = 0.19;
 
 pub struct PlanBreakpoint {
     pub name: &'static str,
@@ -28,14 +27,18 @@ fn breakpoint(plan: &Plan, cheaper_plans: &[Plan]) -> PlanBreakpoint {
     let ias = account_breakpoint(
         plan.billing,
         plan.instant_access_savings,
-        cheaper_plans.iter().map(|p| (p.billing, p.instant_access_savings)),
+        cheaper_plans
+            .iter()
+            .map(|p| (p.billing, p.instant_access_savings)),
         net_factor,
     );
 
     let fcf = account_breakpoint(
         plan.billing,
         plan.flexible_cash_funds,
-        cheaper_plans.iter().map(|p| (p.billing, p.flexible_cash_funds)),
+        cheaper_plans
+            .iter()
+            .map(|p| (p.billing, p.flexible_cash_funds)),
         net_factor,
     );
 

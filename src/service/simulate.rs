@@ -1,6 +1,4 @@
-use crate::data::PLANS;
-
-const TAX_WITHHOLDING: f64 = 0.19;
+use crate::{data::PLANS, infrastructure::TAX_WITHHOLDING};
 
 pub struct SimulationResult {
     pub account_type: &'static str,
