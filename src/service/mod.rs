@@ -1,5 +1,5 @@
 pub mod plan;
 pub mod simulate;
 
-pub use plan::{calculate_breakpoints, PlanBreakpoint};
-pub use simulate::simulate_compound_interest;
+pub use plan::{calculate_breakpoints, recommend_plan, PlanBreakpoint, PlanRecommendation};
+pub use simulate::{calculate_net_interest, simulate_compound_interest};

@@ -29,6 +29,20 @@ pub fn simulate_compound_interest(
     Ok(results)
 }
 
+/// Calculate net interest from daily compounding over 365 days with tax withholding.
+pub fn calculate_net_interest(annual_rate: f64, capital: f64) -> f64 {
+    let daily_rate = annual_rate / 100.0 / 365.0;
+    let mut balance = capital;
+    let mut net_interest = 0.0;
+    for _ in 0..365 {
+        let daily_interest = balance * daily_rate;
+        let daily_net = daily_interest * (1.0 - TAX_WITHHOLDING);
+        net_interest += daily_net;
+        balance += daily_net;
+    }
+    net_interest
+}
+
 fn simulate_account(
     account_type: &'static str,
     annual_rate: f64,
