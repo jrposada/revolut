@@ -9,3 +9,11 @@ pub fn format_number(n: u64) -> String {
     }
     result.chars().rev().collect()
 }
+
+pub fn format_number_signed(n: i64) -> String {
+    if n < 0 {
+        format!("-{}", format_number(n.unsigned_abs()))
+    } else {
+        format_number(n as u64)
+    }
+}

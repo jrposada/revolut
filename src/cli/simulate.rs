@@ -1,4 +1,4 @@
-use crate::infrastructure::{format_number, logger, table, ColumnDefinition, TableOptions};
+use crate::infrastructure::{format_number, format_number_signed, logger, table, ColumnDefinition, TableOptions};
 use crate::service::simulate_compound_interest;
 use clap::Args;
 
@@ -34,7 +34,7 @@ impl SimulateArgs {
                 format!("{}€", format_number(r.gross_interest.round() as u64)),
                 format!("{}€", format_number(r.net_interest.round() as u64)),
                 format!("{}€", format_number(r.final_balance.round() as u64)),
-                format!("{}€", format_number(net_profit.round() as u64)),
+                format!("{}€", format_number_signed(net_profit.round() as i64)),
             ]);
         }
 

@@ -10,32 +10,59 @@ pub struct PlanBreakpoint {
 }
 
 pub fn calculate_breakpoints() -> Vec<PlanBreakpoint> {
-    let standard = &PLANS[0];
-
     PLANS
         .iter()
+        .enumerate()
         .skip(1)
-        .map(|plan| breakpoint(plan, standard))
+        .map(|(i, plan)| {
+            let cheaper_plans = &PLANS[..i];
+            breakpoint(plan, cheaper_plans)
+        })
         .collect()
 }
 
-fn breakpoint(plan: &Plan, baseline: &Plan) -> PlanBreakpoint {
-    let ias_diff = plan.instant_access_savings - baseline.instant_access_savings;
-    let fcf_diff = plan.flexible_cash_funds - baseline.flexible_cash_funds;
+fn breakpoint(plan: &Plan, cheaper_plans: &[Plan]) -> PlanBreakpoint {
     let net_factor = 1.0 - TAX_WITHHOLDING;
+
+    let ias = account_breakpoint(
+        plan.billing,
+        plan.instant_access_savings,
+        cheaper_plans.iter().map(|p| (p.billing, p.instant_access_savings)),
+        net_factor,
+    );
+
+    let fcf = account_breakpoint(
+        plan.billing,
+        plan.flexible_cash_funds,
+        cheaper_plans.iter().map(|p| (p.billing, p.flexible_cash_funds)),
+        net_factor,
+    );
 
     PlanBreakpoint {
         name: plan.name,
         billing: plan.billing,
-        instant_access_savings: if ias_diff > 0.0 {
-            Some((plan.billing / (ias_diff / 100.0 * net_factor)).ceil() as u64)
-        } else {
-            None
-        },
-        flexible_cash_funds: if fcf_diff > 0.0 {
-            Some((plan.billing / (fcf_diff / 100.0 * net_factor)).ceil() as u64)
-        } else {
-            None
-        },
+        instant_access_savings: ias,
+        flexible_cash_funds: fcf,
     }
+}
+
+fn account_breakpoint(
+    billing: f64,
+    rate: f64,
+    cheaper: impl Iterator<Item = (f64, f64)>,
+    net_factor: f64,
+) -> Option<u64> {
+    let mut max_bp: Option<f64> = Some(0.0);
+
+    for (cheaper_billing, cheaper_rate) in cheaper {
+        let rate_diff = rate - cheaper_rate;
+        if rate_diff <= 0.0 {
+            return None;
+        }
+        let billing_diff = billing - cheaper_billing;
+        let bp = billing_diff / (rate_diff / 100.0 * net_factor);
+        max_bp = Some(max_bp.unwrap().max(bp));
+    }
+
+    max_bp.filter(|&v| v > 0.0).map(|v| v.ceil() as u64)
 }
