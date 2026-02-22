@@ -1,0 +1,21 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.ts": "always"
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "files.insertFinalNewline": true,
+  "editor.rulers": [80],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "remote.autoForwardPortsFallback": 0,
+  "cSpell.words": ["revolut"]
+}
