@@ -15,14 +15,13 @@ pub struct IncomeArgs {
 
 impl IncomeArgs {
     pub fn run(&self) {
-        let results =
-            match calculate_required_capital(self.income, self.plan.as_deref()) {
-                Ok(r) => r,
-                Err(e) => {
-                    logger::error(&e);
-                    return;
-                }
-            };
+        let results = match calculate_required_capital(self.income, self.plan.as_deref()) {
+            Ok(r) => r,
+            Err(e) => {
+                logger::error(&e);
+                return;
+            }
+        };
 
         let mut rows: Vec<Vec<String>> = Vec::new();
 
@@ -54,7 +53,9 @@ impl IncomeArgs {
                 ColumnDefinition::new("FCF Rate", 10).align_right(),
                 ColumnDefinition::new("FCF Capital", 14).align_right(),
             ],
-            footer: Some("Tax withholding: 19% | Simple annual interest (no reinvestment)".to_string()),
+            footer: Some(
+                "Tax withholding: 19% | Simple annual interest (no reinvestment)".to_string(),
+            ),
         };
 
         logger::log(&table(&rows, options));
