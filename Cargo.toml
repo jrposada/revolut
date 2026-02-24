@@ -1,8 +1,8 @@
 [package]
-name = "revolut"
+name = "jrp-finance"
 version = "1.0.0"
 edition = "2021"
-description = "My Personal Revolut Utilities"
+description = "JRP Finance Utilities"
 authors = ["Javier Rodriguez Posada"]
 license = "MIT"
 
@@ -13,7 +13,7 @@ thiserror = "2"
 anyhow = "1.0"
 
 [[bin]]
-name = "revolut"
+name = "jrp-finance"
 bench = false
 
 [profile.release]
