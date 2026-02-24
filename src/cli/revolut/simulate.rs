@@ -1,5 +1,5 @@
 use crate::infrastructure::{format_number, format_number_signed, logger, table, ColumnDefinition, TableOptions};
-use crate::service::simulate_compound_interest;
+use crate::service::revolut::simulate_compound_interest;
 use clap::Args;
 
 #[derive(Args, Debug)]

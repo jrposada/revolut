@@ -1,5 +1,5 @@
 use crate::infrastructure::{format_number, logger, table, ColumnDefinition, TableOptions};
-use crate::service::{calculate_breakpoints, recommend_plan};
+use crate::service::revolut::{calculate_breakpoints, recommend_plan};
 use clap::{Args, Subcommand};
 
 #[derive(Args, Debug)]

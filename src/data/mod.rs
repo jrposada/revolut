@@ -1,3 +1,1 @@
-pub mod plan;
-
-pub use plan::{Plan, PLANS};
+pub mod revolut;

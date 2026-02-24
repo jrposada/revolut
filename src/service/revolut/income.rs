@@ -1,4 +1,4 @@
-use crate::{data::PLANS, infrastructure::TAX_WITHHOLDING};
+use crate::{data::revolut::PLANS, infrastructure::TAX_WITHHOLDING};
 
 const NET_FACTOR: f64 = 1.0 - TAX_WITHHOLDING;
 

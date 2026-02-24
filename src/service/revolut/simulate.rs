@@ -1,4 +1,4 @@
-use crate::{data::PLANS, infrastructure::TAX_WITHHOLDING};
+use crate::{data::revolut::PLANS, infrastructure::TAX_WITHHOLDING};
 
 pub struct SimulationResult {
     pub account_type: &'static str,

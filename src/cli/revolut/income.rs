@@ -1,5 +1,5 @@
 use crate::infrastructure::{format_number, logger, table, ColumnDefinition, TableOptions};
-use crate::service::calculate_required_capital;
+use crate::service::revolut::calculate_required_capital;
 use clap::Args;
 
 #[derive(Args, Debug)]

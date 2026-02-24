@@ -1,6 +1,7 @@
-use crate::data::{Plan, PLANS};
+use crate::data::revolut::{Plan, PLANS};
 use crate::infrastructure::TAX_WITHHOLDING;
-use crate::service::simulate::calculate_net_interest;
+
+use super::simulate::calculate_net_interest;
 
 pub struct PlanBreakpoint {
     pub name: &'static str,

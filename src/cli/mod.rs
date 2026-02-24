@@ -1,7 +1,3 @@
-pub mod income;
-pub mod plan;
-pub mod simulate;
+pub mod revolut;
 
-pub use income::IncomeArgs;
-pub use plan::PlanArgs;
-pub use simulate::SimulateArgs;
+pub use revolut::RevolutArgs;
